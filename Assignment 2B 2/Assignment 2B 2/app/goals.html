@@ -1,14 +1,51 @@
 <html>
     <head><!-- Always shows a header, even in smaller screens. -->
         <link rel="stylesheet" href="./material.min.css">
-        <link rel="shortcut icon" href="images/webpageimage.jpg">
+        <link rel="shortcut icon" href="images/webpageimage.png">
         <script src="./material.min.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.blue-amber.min.css" /> 
+        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.teal-blue.min.css" /> 
         <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <title >Just Do It!</title>
+            
+            
+            
+        <style>
+            #popup{
+                height:280px;
+                width:470px;
+                position:fixed;
+                top: 30%;
+                left: 31.5%; 
+                border:2px solid;
+                padding:10px;
+                background:#fff;
+                display:none;
+                z-index: 50;
+                align-content: center;
+            }
+            #close{
+                right:5px;
+                top:5;
+                float:right;   
+            }
+            #add{
+                top: 50%;   
+                position: relative;
+                left: 44%;
+                z-index: 0;
+            }
+            #delete{
+                top: 50%;   
+                position: relative;
+                left: 44%;
+                z-index: 0
+            }
+                
+        </style>
+
           <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
               <!-- Title -->
@@ -28,8 +65,75 @@
             </nav>
           </div>
           <main class="mdl-layout__content">
-            <div class="page-content"><!-- Your content goes here --></div>
+            <div class="page-content"><!-- Your content goes here -->
+              <table id = "goalTable" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" width="50%" align="center">
+                  <thead>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">Goals</th>
+                    </tr>
+                  </thead>  
+                </table>
+                
+                
+                <br>
+                <button id="add" onclick = "document.getElementById('popup').style.display='block';" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="background-color: rgb(33, 150, 243);">
+                    Add
+                </button>  
+                <button onclick = "deleteGoal()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="background-color: rgb(33, 150, 243);" id="delete">
+                    Delete
+                </button>  
+                
+                <div id = 'popup'>
+                    <button id="close" onclick="document.getElementById('popup').style.display='none'">x</button><br>
+                    <form action="#" align = "center">
+                      <div class="mdl-textfield mdl-js-textfield">
+                        <textarea class="mdl-textfield__input" type="text" rows = "3" id="goalInput"></textarea>
+                        <label class="mdl-textfield__label" for="goalInput">Enter Goal</label>
+                      </div>
+                        <div onclick = "addGoal()">
+                            <button id = "goalAddfromPop" onclick = "document.getElementById('popup').style.display='none'" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored " style="background-color: rgb(33, 150, 243);">Add Goal</button>
+                        </div>
+                    </form>
+
+                </div>                
+                
+                
+                
+
+                
+            
+              
+
           </main>
+            <script>
+                var goalCount = 0;
+                
+                function addGoal(){
+                    var goalInput = document.getElementById("goalInput");
+                    var goalTable = document.getElementById("goalTable");
+                    var row = goalTable.insertRow(1);
+                    var td = document.createElement('td');
+                    td.className = 'mdl-data-table__cell--non-numeric';
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var checkbox = document.createElement('input');
+                    checkbox.type = "checkbox"
+                    td.appendChild(checkbox);
+                    row.appendChild(td);
+                    cell1.innerHTML = goalInput;
+                    goalInput.innerHTML = "";
+
+
+
+                }
+            
+                
+                function deleteGoal(){
+                    var goalTable = document.getElementById("goalTable").deleteRow();
+                }
+                
+            
+            </script>
         </div>
     </head>
 </html>
